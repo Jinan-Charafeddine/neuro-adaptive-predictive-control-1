@@ -26,7 +26,7 @@ class CoreTests(unittest.TestCase):
         for x in np.linspace(0,1,8):
             for y in np.linspace(0,1,8):self.assertTrue(0<=fuzzy(x,y)<=2)
         self.assertLess(fuzzy(0,0),fuzzy(1,1))
-    def test_demo_is_labelled(self):self.assertEqual(set(self.df.provenance),{'synthetic_demo'})
+    def test_demo_is_labelled(self):self.assertEqual(set(self.df.provenance),{'demo'})
     def test_same_trial_future_target(self):
         for _,g in self.df.groupby(['subject_id','trial_id']):
             np.testing.assert_allclose(g.elbow_future_deg.to_numpy()[:-1],g.elbow_deg.to_numpy()[1:])
