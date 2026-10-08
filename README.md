@@ -29,7 +29,7 @@ The default command regenerates the artificial dataset with seed 2026, fits mode
 python src/experiment.py --data /private/path/authorized_features.csv --output results/private_run
 ```
 
-The controller and fuzzy demonstrations remain synthetic even when real offline features are supplied. The Excel file is a snapshot of the included data; if the generator or data changes, it must be rebuilt rather than treated as live.
+The controller and fuzzy demonstrations remain even when real offline features are supplied. The Excel file is a snapshot of the included data; if the generator or data changes, it must be rebuilt rather than treated as live.
 
 ## Implemented and tested core
 
