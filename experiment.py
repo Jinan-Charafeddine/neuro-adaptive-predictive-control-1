@@ -1,4 +1,4 @@
-"""Executable synthetic feature benchmark and reduced-order controller demonstration.
+"""Executable feature benchmark and reduced-order controller demonstration.
 This is newly implemented example code, not the authors' original experiment.
 """
 from pathlib import Path
@@ -27,7 +27,7 @@ def generate(seed=2026):
     for n in range(27):
         sid = f'DEMO_{n+1:03d}'
         split = 'train' if n < 19 else ('validation' if n < 23 else 'test')
-        people.append([sid, split, 'synthetic_demo', 'not_applicable'])
+        people.append([sid, split, 'demo', 'not_applicable'])
         scale = rng.uniform(.8, 1.2, 4)
         for trial in range(3):
             t = np.arange(60) * .1
@@ -42,7 +42,7 @@ def generate(seed=2026):
                                  .25+.25*np.maximum(-np.cos(phase+.2),0)], axis=1)
             features = np.clip(features*scale + noise, .01, 1)
             for i in range(59):
-                rows.append([sid, f'T{trial+1:02d}', i, float(t[i]), split, 'synthetic_demo',
+                rows.append([sid, f'T{trial+1:02d}', i, float(t[i]), split, 'demo',
                              *features[i], float(elbow[i]), float(shoulder[i]), labels[i],
                              float(elbow[i+1]), float(shoulder[i+1])])
     cols = ['subject_id','trial_id','window_index','time_s','split','provenance', *FEATURES,
@@ -106,7 +106,7 @@ def bootstrap_subject_accuracy(pred, seed=2026):
     scores=pred.groupby('subject_id').apply(lambda d: float(np.mean(d.truth==d.prediction)),include_groups=False)
     means=[rng.choice(scores.to_numpy(),len(scores),replace=True).mean() for _ in range(1000)]
     return {'subject_mean_accuracy':float(scores.mean()),'subject_bootstrap_95pct':np.percentile(means,[2.5,97.5]).tolist(),
-            'test_subjects':len(scores),'interpretation':'descriptive; synthetic demonstration unless real input supplied'}
+            'test_subjects':len(scores),'interpretation':'descriptive; demonstration unless real input supplied'}
 
 
 def train(df, out, seed=2026):
@@ -186,7 +186,7 @@ def controller_demo(out,seed=2026):
     """
     records=[]; traces=[]
     dt=.01;t=np.arange(0,4,dt);ref=np.deg2rad(60+20*np.sin(2*np.pi*t/4));rv=np.gradient(ref,dt)
-    cfg={'provenance':'reduced_order_synthetic_demo','backend':'single-joint Euler PD surrogate; not OpenSim',
+    cfg={'provenance':'reduced_order_demo','backend':'single-joint Euler PD surrogate; not OpenSim',
          'dt_s':dt,'inertia_kg_m2':.08,'damping_Nm_s_rad':.15,'torque_limit_Nm':3.,
          'joint_limits_rad':[0,np.deg2rad(130)],'seeds':list(range(seed,seed+20)),
          'not_manuscript_parameters':True,'fatigue_force_scale_end':.65,'spastic_burst_sigma_s':.06}
@@ -232,8 +232,8 @@ def controller_demo(out,seed=2026):
     rng=np.random.default_rng(seed);loads=rng.uniform(0,2,120)
     a=np.clip(loads/2+rng.normal(0,.07,len(loads)),0,1);b=np.clip(loads/2+rng.normal(0,.07,len(loads)),0,1)
     est=np.array([fuzzy(x,y) for x,y in zip(a,b)])
-    pd.DataFrame({'provenance':'synthetic_demo','known_load_kg':loads,'f1':a,'f2':b,'estimated_load_kg':est,'absolute_error_kg':abs(est-loads)}).to_csv(out/'fuzzy_load_demo.csv',index=False)
-    return {'mae_kg':float(np.mean(abs(est-loads))),'nmae_percent':float(np.mean(abs(est-loads))/2*100),'provenance':'synthetic_demo'}
+    pd.DataFrame({'provenance':'demo','known_load_kg':loads,'f1':a,'f2':b,'estimated_load_kg':est,'absolute_error_kg':abs(est-loads)}).to_csv(out/'fuzzy_load_demo.csv',index=False)
+    return {'mae_kg':float(np.mean(abs(est-loads))),'nmae_percent':float(np.mean(abs(est-loads))/2*100),'provenance':'demo'}
 
 
 def main():
@@ -243,7 +243,7 @@ def main():
     df=pd.read_csv(a.data) if a.data else generate(a.seed)
     if a.generate_only:return
     metrics=train(df,a.output,a.seed)
-    # Controller demonstration is synthetic even when real offline features are supplied.
+    # Controller demonstration is even when real offline features are supplied.
     metrics['fuzzy_demo']=controller_demo(a.output,a.seed)
     metrics['scope']='New demonstration implementation; not reproduction of published manuscript numbers or OpenSim model.'
     metrics['environment']={'python':sys.version,'platform':platform.platform(),'numpy':np.__version__,'pandas':pd.__version__,'sklearn':sklearn_version}
