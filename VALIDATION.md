@@ -1,0 +1,1 @@
+Core pipeline executed successfully. Seven unit tests passed. Excel formulas report 19/4/4 artificial IDs (27 total), and all five sheet previews were inspected. PyTorch LSTM, native OpenSim export and real-recording importer were syntax-checked only. No original manuscript numerical results were reproduced.

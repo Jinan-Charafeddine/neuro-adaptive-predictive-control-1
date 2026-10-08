@@ -1,0 +1,10 @@
+split,intention,windows
+test,extension,300
+test,flexion,288
+test,hold,120
+train,extension,1425
+train,flexion,1368
+train,hold,570
+validation,extension,300
+validation,flexion,288
+validation,hold,120

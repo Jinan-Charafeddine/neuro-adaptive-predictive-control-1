@@ -1,0 +1,136 @@
+{
+  "provenance": [
+    "synthetic_demo"
+  ],
+  "seed": 2026,
+  "classifier": {
+    "classical_svm": {
+      "accuracy": 0.882768361581921,
+      "selected_C": 1.0,
+      "validation_accuracy": 0.8940677966101694,
+      "balanced_training_samples": 180,
+      "per_class": {
+        "extension": {
+          "precision": 0.992,
+          "recall": 0.8266666666666667,
+          "f1-score": 0.9018181818181819,
+          "support": 300.0
+        },
+        "flexion": {
+          "precision": 0.9814126394052045,
+          "recall": 0.9166666666666666,
+          "f1-score": 0.947935368043088,
+          "support": 288.0
+        },
+        "hold": {
+          "precision": 0.5978835978835979,
+          "recall": 0.9416666666666667,
+          "f1-score": 0.7313915857605178,
+          "support": 120.0
+        },
+        "accuracy": 0.882768361581921,
+        "macro avg": {
+          "precision": 0.8570987457629341,
+          "recall": 0.8949999999999999,
+          "f1-score": 0.8603817118739293,
+          "support": 708.0
+        },
+        "weighted avg": {
+          "precision": 0.9208938868569644,
+          "recall": 0.882768361581921,
+          "f1-score": 0.8916918514592175,
+          "support": 708.0
+        }
+      },
+      "subject_mean_accuracy": 0.882768361581921,
+      "subject_bootstrap_95pct": [
+        0.8559322033898304,
+        0.9138418079096046
+      ],
+      "test_subjects": 4,
+      "interpretation": "descriptive; synthetic demonstration unless real input supplied"
+    },
+    "statevector_kernel_svm": {
+      "accuracy": 0.5056497175141242,
+      "selected_C": 1.0,
+      "validation_accuracy": 0.5861581920903954,
+      "balanced_training_samples": 180,
+      "per_class": {
+        "extension": {
+          "precision": 0.5758513931888545,
+          "recall": 0.62,
+          "f1-score": 0.5971107544141252,
+          "support": 300.0
+        },
+        "flexion": {
+          "precision": 0.6036866359447005,
+          "recall": 0.4548611111111111,
+          "f1-score": 0.5188118811881188,
+          "support": 288.0
+        },
+        "hold": {
+          "precision": 0.24404761904761904,
+          "recall": 0.3416666666666667,
+          "f1-score": 0.2847222222222222,
+          "support": 120.0
+        },
+        "accuracy": 0.5056497175141242,
+        "macro avg": {
+          "precision": 0.47452854939372474,
+          "recall": 0.4721759259259259,
+          "f1-score": 0.46688161927482213,
+          "support": 708.0
+        },
+        "weighted avg": {
+          "precision": 0.5309362759808536,
+          "recall": 0.5056497175141242,
+          "f1-score": 0.5123131564591561,
+          "support": 708.0
+        }
+      },
+      "subject_mean_accuracy": 0.5056497175141244,
+      "subject_bootstrap_95pct": [
+        0.4364406779661017,
+        0.5819209039548023
+      ],
+      "test_subjects": 4,
+      "interpretation": "descriptive; synthetic demonstration unless real input supplied"
+    }
+  },
+  "regression": {
+    "elbow_future_deg": {
+      "model": "SVR",
+      "parameters": {
+        "svr__C": 10.0,
+        "svr__gamma": "scale"
+      },
+      "mae_deg": 12.871585082876704,
+      "rmse_deg": 16.89917108578358,
+      "validation_mae_deg": 13.714833103571436
+    },
+    "shoulder_future_deg": {
+      "model": "SVR",
+      "parameters": {
+        "svr__C": 10.0,
+        "svr__gamma": "scale"
+      },
+      "mae_deg": 5.993123338579145,
+      "rmse_deg": 7.92480642815548,
+      "validation_mae_deg": 6.384638196464481
+    }
+  },
+  "fuzzy_demo": {
+    "mae_kg": 0.16329987744860713,
+    "nmae_percent": 8.164993872430356,
+    "provenance": "synthetic_demo"
+  },
+  "scope": "New demonstration implementation; not reproduction of published manuscript numbers or OpenSim model.",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "sklearn": "1.8.0"
+  },
+  "dataset_sha256": "cf282001c569e3888e1eb9c05bc2982977f42178aebd43fca97737b4df42166b"
+}
